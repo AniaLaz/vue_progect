@@ -1,5 +1,6 @@
 <template>
-  <div class="apartment-list">
+    <Container>
+          <div class="apartment-list">
     <ApartmentItem
       v-for="{ id, descr, price, rating, imgUrl } in items"
       :key="id"
@@ -10,15 +11,19 @@
       class="apartment-list__item"
     />
   </div>
+    </Container>
+
 </template>
 
 <script>
 import ApartmentItem from "./ApartmentItem.vue";
+import Container from "../shared/BoxContainer.vue";
 
 export default {
   name: "ApartmentsList",
   components: {
-    ApartmentItem,
+      ApartmentItem,
+    Container
   },
   props: {
     items: {
