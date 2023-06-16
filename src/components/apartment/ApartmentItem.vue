@@ -1,5 +1,5 @@
 <template>
-  <div class="apartments-item ">
+  <div class="apartments-item">
     <div class="apartments-item__inner">
       <img :src="imgSrc" alt="" class="apartments-item__photo" />
       <div class="apartments-item__content">
@@ -10,6 +10,7 @@
           <StarRating :rating="rating" />
         </div>
         <div class="apartments-item__price">UAN {{ price }}</div>
+        <a href="https://facebook.com" @click.prevent.stop="handleLinkClick">facebook</a>
       </div>
     </div>
   </div>
@@ -41,6 +42,14 @@ export default {
       default: "",
     },
   },
+  methods: {
+    log(event) {
+      console.log("click", event);
+    },
+    handleLinkClick() {
+      console.log("handleLinkClick");
+    }
+  }
 };
 </script>
 

@@ -1,49 +1,51 @@
 <template>
   <h1>{{ title }}</h1>
+
   <ButtonStandard @click="incremen">Click me</ButtonStandard>
   <!-- <StarRating :rating="2.5" /> -->
-    <DirectiveesTest />
-    <ApartmentsList :items="apartments"/>
+  <h2>{{ event.text }}</h2>
+  <!-- <input type="text" v-model="text" /> -->
+<CustomInput type="text" label="Title" v-model="event.text" />
+  <!-- <CustomInput type="text" v-model="event.title" label="Description" /> --> -->
+  <ApartmentsList :items="apartments">
+    <template v-slot:title>New Title </template>
+    <template v-slot:apartment="{ apartment }">
+      <ApartmentItem
+        :key="apartment.id"
+        :descr="apartment.descr"
+        :price="apartment.price"
+        :rating="apartment.rating"
+        :imgSrc="apartment.imgUrl"
+        @click="handalItemClick"
+      />
+    </template>
+  </ApartmentsList>
 </template>
 
 <script>
 import ButtonStandard from "./components/ButtonStandard.vue";
-import DirectiveesTest from "./components/DirectiveesTest.vue";
-// import StarRating from "./components/StarRating.vue";
 import ApartmentsList from "./components/apartment/ApartmentsList.vue";
 import apartments from "./components/apartment/apartments";
+import ApartmentItem from "./components/apartment/ApartmentItem.vue";
+import CustomInput from "./components/shared/CustomInput.vue";
 
 export default {
   name: "App",
   components: {
     ButtonStandard,
-    DirectiveesTest,
-    // StarRating,
     ApartmentsList,
-    
+    ApartmentItem,
+    CustomInput,
   },
   data() {
     return {
+      event: {
+             text: "",
+      },
+ 
       amountOfClicks: 0,
       apartments,
-      apartment: {
-        id: "42342",
-        title:
-          "Aut qui adipisgi distinctio maiores molestiae sit est inventjre vero",
-        descr:
-          "Non perferendis rerum a in nisi exercitationem dolorum perferendis",
-        price: 2032,
-        rating: 4.7,
-        location: {
-          city: "Kherson",
-        },
-        owner: {
-          name: "Ellen",
-          phone: "1324345",
-          email: "Ellen@gmail.com",
-        },
-      },
-    };
+    }
   },
   computed: {
     title() {
@@ -53,6 +55,9 @@ export default {
   methods: {
     incremen() {
       this.amountOfClicks += 1;
+    },
+    handalItemClick() {
+      console.log("item click");
     },
   },
 };
