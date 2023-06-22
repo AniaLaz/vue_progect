@@ -7,6 +7,7 @@
   <!-- <input type="text" v-model="text" /> -->
 <CustomInput type="text" label="Title" v-model="event.text" />
   <!-- <CustomInput type="text" v-model="event.title" label="Description" /> --> -->
+  <CustomSelect :items="['name','label', 'salary']"/>
   <ApartmentsList :items="apartments">
     <template v-slot:title>New Title </template>
     <template v-slot:apartment="{ apartment }">
@@ -28,6 +29,7 @@ import ApartmentsList from "./components/apartment/ApartmentsList.vue";
 import apartments from "./components/apartment/apartments";
 import ApartmentItem from "./components/apartment/ApartmentItem.vue";
 import CustomInput from "./components/shared/CustomInput.vue";
+import CustomSelect from "./components/shared/CustomSelect.vue"
 
 export default {
   name: "App",
@@ -36,6 +38,7 @@ export default {
     ApartmentsList,
     ApartmentItem,
     CustomInput,
+    CustomSelect
   },
   data() {
     return {
